@@ -1,11 +1,11 @@
 import './Binspector.css';
+import React from 'react';
+import TopMenu from './TopBar/TopBar';
 
 function Binspector() {
   return (
-    <div className="App">
-      <header className="App-header">
-        MAIN
-      </header>
+    <div>
+      <TopMenu/>
     </div>
   );
 }
