@@ -50,6 +50,8 @@ const CustomMenuItem: React.FC<CustomMenuItemProps> = ({ icon: Icon, label, menu
 };
 
 function TopMenu() {
+  const [isLogin, setLogin] = React.useState(false);
+
   const menuItems = [
     { label: 'Temp', onClick: () => console.log('Temp') },
   ];
@@ -64,6 +66,8 @@ function TopMenu() {
     { label: 'Logout', onClick: () => console.log('Logout') }
   ];
 
+  const userMenu = isLogin ? userItems : loginItems;
+
   return (
     <div>
       <AppBar position="static">
@@ -71,7 +75,7 @@ function TopMenu() {
           <Box sx={{ display: 'flex', flexGrow: 1 }}>
           </Box>
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            <CustomMenuItem icon={AccountCircle} label="Account" menuItems={userItems} />
+            <CustomMenuItem icon={AccountCircle} label="Account" menuItems={userMenu} />
             <CustomMenuItem icon={MenuIcon} label="Account" menuItems={menuItems} />
           </Box>
         </Toolbar>
