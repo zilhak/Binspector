@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
@@ -6,6 +6,7 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import MenuIcon from '@mui/icons-material/Menu';
+import FileOpenIcon from '@mui/icons-material/FileOpen';
 import { Typography, Box } from '@mui/material';
 
 interface CustomMenuItemProps {
@@ -49,6 +50,26 @@ const CustomMenuItem: React.FC<CustomMenuItemProps> = ({ icon: Icon, label, menu
   );
 };
 
+interface CustomButtonItemProps {
+  icon: any;
+  label: string;
+  onClick: () => void;
+}
+
+const CustomButtonItem: React.FC<CustomButtonItemProps> = ({ icon: Icon, label, onClick }) => {
+  return (
+    <IconButton
+      size="large"
+      edge="end"
+      color="inherit"
+      aria-label={label}
+      onClick={onClick}
+    >
+      <Icon />
+    </IconButton>
+  );
+}
+
 function TopMenu() {
   const [isLogin, setLogin] = React.useState(false);
 
@@ -67,12 +88,31 @@ function TopMenu() {
   ];
 
   const userMenu = isLogin ? userItems : loginItems;
+  const [file, setFile] = useState<File | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null); 
+  const handleButtonClick = () => {
+    fileInputRef.current?.click();
+  };
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedFile = event.target.files?.[0];
+    if (selectedFile) {
+      setFile(selectedFile);
+    }
+  };
 
   return (
     <div>
       <AppBar position="static">
         <Toolbar>
           <Box sx={{ display: 'flex', flexGrow: 1 }}>
+            <CustomButtonItem icon={FileOpenIcon} label="Menu" onClick={handleButtonClick} />
+            <input
+              type="file"
+              ref={fileInputRef}
+              style={{ display: 'none' }}
+              onChange={handleFileChange}
+            />
           </Box>
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <CustomMenuItem icon={AccountCircle} label="Account" menuItems={userMenu} />

@@ -1,0 +1,24 @@
+
+.editor {
+  height: 100vh;
+}
+
+
+.hex-panel {
+  height: 100vh;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  border: none;
+  margin: 4px;
+}
+
+.string-panel {
+  height: 100vh;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  border: none;
+  margin: 4px;
+}
+
