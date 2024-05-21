@@ -1,36 +1,35 @@
-import './Binspector.css';
-import React from 'react';
-import { useEffect } from 'react';
-import TopMenu from './top_bar/TopBar';
-import EditorPanel from './body/editor/Editor';
-import InfoPanel from './body/info/Info';
+import React, { useEffect } from "react";
+import "./Binspector.css";
+import EditorPanel from "./body/editor/Editor";
+import InfoPanel from "./body/info/Info";
+import TopMenu from "./top_bar/TopBar";
 
 function Binspector() {
-  const [direction, setDirection] = React.useState<'column' | 'row'>('row');
+  const [direction, setDirection] = React.useState<"column" | "row">("row");
 
   const updateLayout = () => {
     const { innerWidth: width, innerHeight: height } = window;
     if (width > height) {
-      setDirection('row');
+      setDirection("row");
     } else {
-      setDirection('column');
+      setDirection("column");
     }
   };
 
   useEffect(() => {
     updateLayout();
-    window.addEventListener('resize', updateLayout);
+    window.addEventListener("resize", updateLayout);
     return () => {
-      window.removeEventListener('resize', updateLayout);
+      window.removeEventListener("resize", updateLayout);
     };
   }, []);
 
   return (
-    <div className='screen'>
-      <TopMenu/>
+    <div className="screen">
+      <TopMenu />
       <div className={`content ${direction}`}>
-        <EditorPanel/>
-        <InfoPanel/>
+        <EditorPanel />
+        <InfoPanel />
       </div>
     </div>
   );

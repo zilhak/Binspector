@@ -1,8 +1,8 @@
-import './Editor.css'
+import "./Editor.css";
 
 function StringPanel() {
   return (
-    <div className='string-panel'>
+    <div className="string-panel">
       <h1>StringPanel</h1>
     </div>
   );
