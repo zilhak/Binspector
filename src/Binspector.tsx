@@ -7,6 +7,7 @@ import InfoPanel from "./body/info/Info";
 
 function Binspector() {
   const [direction, setDirection] = React.useState<"column" | "row">("row");
+  const [file, setFile] = React.useState<File | null>(null);
 
   const updateLayout = () => {
     const { innerWidth: width, innerHeight: height } = window;
@@ -27,9 +28,9 @@ function Binspector() {
 
   return (
     <div className="screen">
-      <TopMenu />
+      <TopMenu setFile={setFile} />
       <div className={`content ${direction}`}>
-        <EditorPanel />
+        <EditorPanel file={file}/>
         <InfoPanel />
       </div>
     </div>

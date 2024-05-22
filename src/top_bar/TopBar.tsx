@@ -83,7 +83,11 @@ const CustomButtonItem: React.FC<CustomButtonItemProps> = ({
   );
 };
 
-function TopMenu() {
+interface TopMenuProps {
+  setFile: React.Dispatch<React.SetStateAction<File | null>>;
+}
+
+function TopMenu({ setFile }: TopMenuProps) {
   const [isLogin, setLogin] = React.useState(false);
 
   const menuItems = [{ label: "Temp", onClick: () => console.log("Temp") }];
@@ -97,7 +101,6 @@ function TopMenu() {
   ];
 
   const userMenu = isLogin ? userItems : loginItems;
-  const [file, setFile] = useState<File | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const handleButtonClick = () => {
     fileInputRef.current?.click();
