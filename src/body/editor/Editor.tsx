@@ -20,11 +20,11 @@ function EditorPanel({ file }: EditorPanelProps) {
       };
       reader.readAsArrayBuffer(file);
     }
-  });
+  }, [file]);
 
   return (
     <div className="panel portion-editor editor">
-      <HexPanel buffer={fileData} />
+      <HexPanel file={file} />
       <StringPanel />
     </div>
   );

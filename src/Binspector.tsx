@@ -5,9 +5,20 @@ import TopMenu from "./top_bar/TopBar";
 import EditorPanel from "./body/editor/Editor";
 import InfoPanel from "./body/info/Info";
 
+type Settings = {
+  byte_per_row: number;
+  number_system: "hex" | "dec" | "oct" | "bin";
+
+  show_string_panel: boolean;
+  show_info_panel: boolean;
+}
+
+
+
 function Binspector() {
   const [direction, setDirection] = React.useState<"column" | "row">("row");
   const [file, setFile] = React.useState<File | null>(null);
+  const [index, setIndex] = React.useState<number>(0);
 
   const updateLayout = () => {
     const { innerWidth: width, innerHeight: height } = window;

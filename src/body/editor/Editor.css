@@ -38,10 +38,12 @@
   width: 50px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
   background-color: #c0c0c0;
 }
 
-.row-bar {
+.row-bar-textarea {
   margin-top: 20px;
+}
+
+.row-bar {
 }

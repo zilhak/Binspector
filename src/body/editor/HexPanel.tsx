@@ -1,5 +1,5 @@
 import "./Editor.css";
-import React from "react";
+import React, { useEffect } from "react";
 
 interface HexEditorProps {
   data: Uint8Array | null;
@@ -14,12 +14,9 @@ function HexCell({ value }: HexCellProps) {
 }
 
 const HexEditor = ({ data }: HexEditorProps) => {
-  const hexValues: string[] =
-    data == null
-      ? []
-      : Array.from(data).map((byte) =>
-          byte.toString(16).padStart(2, "0").toUpperCase()
-        );
+  const hexValues: string[] = data == null ? [] : Array.from(data).map((byte) =>
+    byte.toString(16).padStart(2, "0").toUpperCase()
+  );
 
   return (
     <div className="hex-editor">
@@ -31,44 +28,51 @@ const HexEditor = ({ data }: HexEditorProps) => {
   );
 };
 
-const ColumnBar = ({ count }: { count: number }) => {
+const ColumnBar = ({ index, count }: { index: number, count: number }) => {
   const columns = [];
 
   for (let i = 0; i < count; i++) {
-    columns.push(
-      <div className="column-bar">{i.toString(16).toUpperCase()}</div>
-    );
+    columns.push(<div className="column-bar">{i.toString(16).toUpperCase().padStart(2, '0')}</div>);
   }
 
   return <div className="column-bar-container">{columns}</div>;
-};
+}
 
-const RowBar = ({ count }: { count: number }) => {
+const RowBar = ({ index, count, stride }: { index: number, count: number, stride: number }) => {
   const rows = [];
 
   for (let i = 0; i < count; i++) {
-    rows.push(<div className="row-bar">{i.toString(16).toUpperCase()}</div>);
+    rows.push(<div className="row-bar">{i.toString(16).toUpperCase().padStart(4, "0")}</div>);
   }
 
-  return <div className="row-bar-container">{rows}</div>;
-};
-
-interface HexPanelProps {
-  buffer: ArrayBuffer | null;
+  return <div className="row-bar-textarea">{rows}</div>;
 }
 
-function HexPanel({ buffer }: HexPanelProps) {
-  const [hexData, setHexData] = React.useState<Uint8Array | null>(null);
+interface HexPanelProps {
+  file: File | null;
+}
 
-  React.useEffect(() => {
-    setHexData(buffer ? new Uint8Array(buffer) : null);
-  }, [buffer]);
+function HexPanel({ file }: HexPanelProps) {
+  const [hexData, setHexData] = React.useState<Uint8Array | null>(null);
+  const [fileData, setFileData] = React.useState<ArrayBuffer | null>(null);
+
+  useEffect(() => {
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        setFileData(event.target?.result as ArrayBuffer);
+      };
+      reader.readAsArrayBuffer(file);
+    }
+  }, [file]);
 
   return (
     <div className="hex-panel">
-      <RowBar count={16} />
+      <div className="row-bar-container">
+        <RowBar index={0} count={16} stride={16} />
+      </div>
       <div className="hex-panel-right">
-        <ColumnBar count={16} />
+        <ColumnBar index={0} count={16} />
         <HexEditor data={hexData} />
       </div>
     </div>
