@@ -1,23 +1,22 @@
+import React, { useEffect } from "react";
 import "./Binspector.css";
-import React from "react";
-import { useEffect } from "react";
-import TopMenu from "./top_bar/TopBar";
-import EditorPanel from "./body/editor/Editor";
-import InfoPanel from "./body/info/Info";
+import { EditorPanel } from "./EditorPanel/EditorPanel";
+import { InfoPanel } from "./InfoPanel/InfoPanel";
+import { TopMenu } from "./TopMenu/TopMenu";
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 type Settings = {
   byte_per_row: number;
   number_system: "hex" | "dec" | "oct" | "bin";
 
   show_string_panel: boolean;
   show_info_panel: boolean;
-}
-
-
+};
 
 function Binspector() {
   const [direction, setDirection] = React.useState<"column" | "row">("row");
   const [file, setFile] = React.useState<File | null>(null);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [index, setIndex] = React.useState<number>(0);
 
   const updateLayout = () => {
@@ -41,7 +40,7 @@ function Binspector() {
     <div className="screen">
       <TopMenu setFile={setFile} />
       <div className={`content ${direction}`}>
-        <EditorPanel file={file}/>
+        <EditorPanel file={file} />
         <InfoPanel />
       </div>
     </div>
