@@ -8,6 +8,9 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { OverridableComponent } from "@mui/material/OverridableComponent";
 import Toolbar from "@mui/material/Toolbar";
+import "./TopMenu.css";
+import "@/theme.css";
+
 import {
   ChangeEvent,
   Dispatch,
@@ -25,7 +28,7 @@ export function TopMenu({ setFile }: TopMenuProps) {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isLogin, setLogin] = useState(false);
 
-  const menuItems = [{ label: "Temp", onClick: () => console.log("Temp") }];
+  const menuItems = [{ label: "Change Theme", onClick: () => document.body.classList.toggle("dark-theme") }];
 
   const loginItems = [{ label: "Login", onClick: () => console.log("Login") }];
 
@@ -50,7 +53,7 @@ export function TopMenu({ setFile }: TopMenuProps) {
 
   return (
     <div>
-      <AppBar position="static">
+      <AppBar position="static" className="top-bar">
         <Toolbar>
           <Box sx={{ display: "flex", flexGrow: 1 }}>
             <CustomButtonItem
