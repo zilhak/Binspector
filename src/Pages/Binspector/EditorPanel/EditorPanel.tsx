@@ -18,6 +18,7 @@ export function EditorPanel({ file }: EditorPanelProps) {
       const reader = new FileReader();
       reader.onload = (event) => {
         setFileData(event.target?.result as ArrayBuffer);
+        setOffset(0);
       };
       reader.readAsArrayBuffer(file);
     }
@@ -25,7 +26,7 @@ export function EditorPanel({ file }: EditorPanelProps) {
 
   return (
     <div className="panel portion-editor editor">
-      <HexPanel file={file} />
+      <HexPanel fileData={fileData} offset={offset} />
       <StringPanel />
     </div>
   );
