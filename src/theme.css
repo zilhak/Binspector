@@ -8,6 +8,7 @@
   --color-danger: #dc3545;
   --color-light: #f8f9fa;
   --color-dark: #343a40;
+  --color-charactor: #e0e0e0;
 
   --default-bg-color: #121212;
   --default-text-color: #e0e0e0;
@@ -26,4 +27,5 @@ body {
   --color-danger: #dc3545;
   --color-light: #f8f9fa;
   --color-dark: #343a40;
+  --color-charactor: #e0e0e0;
 }

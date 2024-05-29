@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Grid, Paper } from "@mui/material";
 
 interface HexPanelProps {
   fileData: ArrayBuffer | null;
@@ -17,17 +18,21 @@ export function HexPanel({ fileData, offset }: HexPanelProps) {
       setHexData(null);
     }
   }, [fileData, offset]);
-  const rowSize = 16; // TODO: get from screen size 
+  const rowSize = 16; // TODO: get from screen size
   const columnSize = 16; // TODO: get from settings
   const stride = 1;
 
   return (
     <div className="hex-panel">
       <div className="row-bar-container">
-        <RowBar index={offset} count={columnSize} stride={stride * columnSize} />
+        <RowBar
+          index={offset}
+          count={columnSize}
+          stride={stride * columnSize}
+        />
       </div>
       <div className="hex-panel-right">
-        <ColumnBar index={offset} count={rowSize} stride={stride}/>
+        <ColumnBar index={offset} count={rowSize} stride={stride} />
         <HexEditor data={hexData} />
       </div>
     </div>
@@ -40,7 +45,7 @@ const RowBar = (props: { index: number; count: number; stride: number }) => {
   let offset = props.index;
   for (let i = 0; i < props.count; i++) {
     rows.push(
-      <div className="row-bar">
+      <div key={i} className="row-bar">
         {offset.toString(16).toUpperCase().padStart(4, "0")}
       </div>,
     );
@@ -55,7 +60,7 @@ const ColumnBar = (props: { index: number; count: number; stride: number }) => {
 
   for (let i = props.index; i < props.count; i += props.stride) {
     columns.push(
-      <div className="column-bar">
+      <div key={i} className="column-bar">
         {i.toString(16).toUpperCase().padStart(2, "0")}
       </div>,
     );
@@ -76,11 +81,18 @@ const HexEditor = ({ data }: HexEditorProps) => {
         );
 
   return (
-    <div className="hex-editor">
+    <Grid 
+      container 
+      spacing={2} 
+      className="hex-editor"
+      sx={{
+        marginTop: '-6px',
+        marginLeft: '-6px',
+      }}>
       {hexValues.map((hex, index) => (
         <HexCell key={index} value={hex} />
       ))}
-    </div>
+    </Grid>
   );
 };
 

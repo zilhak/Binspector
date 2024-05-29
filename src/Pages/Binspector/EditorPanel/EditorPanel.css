@@ -16,6 +16,16 @@
   flex-direction: column;
 }
 
+.hex-editor {
+  display: flex;
+  margin-top: 0;
+}
+
+.hex-cell {
+  color: var(--color-charactor);
+  margin: 6px;
+}
+
 .string-panel {
   height: 100vh;
   flex: 1;
