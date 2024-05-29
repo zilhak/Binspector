@@ -32,7 +32,7 @@ export function HexPanel({ fileData, offset }: HexPanelProps) {
         />
       </div>
       <div className="hex-panel-right">
-        <ColumnBar index={offset} count={rowSize} stride={stride} />
+        <ColumnBar count={rowSize} stride={stride} />
         <HexEditor data={hexData} />
       </div>
     </div>
@@ -55,10 +55,10 @@ const RowBar = (props: { index: number; count: number; stride: number }) => {
   return <div className="row-bar-textarea">{rows}</div>;
 };
 
-const ColumnBar = (props: { index: number; count: number; stride: number }) => {
+const ColumnBar = (props: { count: number; stride: number }) => {
   const columns = [];
 
-  for (let i = props.index; i < props.count; i += props.stride) {
+  for (let i = 0; i < props.count; i += props.stride) {
     columns.push(
       <div key={i} className="column-bar">
         {i.toString(16).toUpperCase().padStart(2, "0")}

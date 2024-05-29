@@ -24,6 +24,7 @@
 .hex-cell {
   color: var(--color-charactor);
   margin: 6px;
+  font-size: 15px
 }
 
 .string-panel {
@@ -40,6 +41,11 @@
   flex-direction: row;
   gap: 10px;
   background-color: #e0e0e0;
+}
+
+.column-bar {
+  font-size: 15px;
+  margin-right: 2px;
 }
 
 .row-bar-container {
