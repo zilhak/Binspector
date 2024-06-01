@@ -33,7 +33,7 @@ export function HexPanel({ fileData, offset }: HexPanelProps) {
       </div>
       <div className="hex-panel-right">
         <ColumnBar count={rowSize} stride={stride} />
-        <HexEditor data={hexData} />
+        <HexEditor data={hexData} rowSize={rowSize} columnSize={columnSize} />
       </div>
     </div>
   );
@@ -52,12 +52,15 @@ const RowBar = (props: { index: number; count: number; stride: number }) => {
     offset += props.stride;
   }
 
-  return <div className="row-bar-textarea">{rows}</div>;
+  return <div className="row-bar-area">{rows}</div>;
 };
 
 const ColumnBar = (props: { count: number; stride: number }) => {
   const columns = [];
 
+  columns.push(
+    <div className="column-bar-first-margin"> </div>,
+  );
   for (let i = 0; i < props.count; i += props.stride) {
     columns.push(
       <div key={i} className="column-bar-item">
@@ -71,8 +74,11 @@ const ColumnBar = (props: { count: number; stride: number }) => {
 
 interface HexEditorProps {
   data: Uint8Array | null;
+  rowSize: number;
+  columnSize: number;
 }
-const HexEditor = ({ data }: HexEditorProps) => {
+
+const HexEditor = ({ data, rowSize, columnSize }: HexEditorProps) => {
   const hexValues: string[] =
     data == null
       ? []
@@ -81,15 +87,17 @@ const HexEditor = ({ data }: HexEditorProps) => {
         );
 
   return (
-    <Grid
-      container 
-      spacing={2} 
-      className="hex-editor"
-      sx={{ margin: '0px', }}>
-      {hexValues.map((hex, index) => (
-        <HexCell key={index} value={hex} />
-      ))}
-    </Grid>
+    <div className="hex-editor-container">
+      <Grid
+        container 
+        spacing={2} 
+        className="hex-editor"
+        sx={{ margin: '0px', }}>
+        {hexValues.map((hex, index) => (
+          <HexCell key={index} value={hex} />
+        ))}
+      </Grid>
+    </div>
   );
 };
 

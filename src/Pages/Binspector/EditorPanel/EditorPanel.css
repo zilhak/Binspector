@@ -20,8 +20,13 @@
 
 .hex-cell {
   color: var(--color-charactor);
-  margin-left: 6px;
-  font-size: 15px
+  width: var(--layout-editor-column-item-width);
+  height: var(--layout-editor-row-item-height);
+
+  margin-left: var(--layout-editor-column-item-margin-left);
+  margin-right: var(--layout-editor-column-item-margin-right);
+  margin-top: var(--layout-editor-row-item-margin-top);
+  margin-bottom: var(--layout-editor-row-item-margin-bottom);
 }
 
 .string-panel {
@@ -35,17 +40,20 @@
   height: 20px;
   display: flex;
   flex-direction: row;
-  gap: 10px;
   background-color: #e0e0e0;
+
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.column-bar-first-margin {
+  width: var(--layout-editor-column-item-margin-first)
 }
 
 .column-bar-item {
   width: var(--layout-editor-column-item-width);
   margin-left: var(--layout-editor-column-item-margin-left);
   margin-right: var(--layout-editor-column-item-margin-right);
-
-  font-size: 15px;
-  font-weight: bold;
 }
 
 .row-bar-container {
@@ -56,8 +64,11 @@
   background-color: #c0c0c0;
 }
 
-.row-bar-textarea {
-  margin-top: var(--layout-editor-column-bar-height);
+.row-bar-area {
+  margin-top: calc(var(--layout-editor-column-bar-height) + var(--layout-editor-row-item-margin-first));
+
+  text-align: right;
+  font-weight: bold;
 }
 
 .row-bar-item {
@@ -65,7 +76,9 @@
   height: var(--layout-editor-row-item-height);
   margin-top: var(--layout-editor-row-item-margin-top);
   margin-bottom: var(--layout-editor-row-item-margin-bottom);
+}
 
-  text-align: right;
-  font-weight: bold;
+.hex-editor-container {
+  margin-top: var(--layout-editor-row-item-margin-first);
+  margin-left: var(--layout-editor-column-item-margin-first);
 }
