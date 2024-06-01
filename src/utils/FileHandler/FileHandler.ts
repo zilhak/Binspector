@@ -1,4 +1,4 @@
-class FileHandler {
+export class FileHandler {
   static async read(file: File): Promise<string> {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
@@ -8,5 +8,3 @@ class FileHandler {
     });
   }
 }
-
-export default FileHandler;
