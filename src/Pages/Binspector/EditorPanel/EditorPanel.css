@@ -6,15 +6,25 @@
   height: 100vh;
   flex: 1;
   display: flex;
+  box-sizing: border-box;
   flex-direction: row;
   border: none;
-  margin: 4px;
 }
 
 .hex-panel-right {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+}
+
+.hex-editor {
+  display: flex;
+  margin-top: 0;
+}
+
+.hex-cell {
+  color: var(--color-charactor);
+  margin: 6px;
+  font-size: 15px
 }
 
 .string-panel {
@@ -23,7 +33,6 @@
   display: flex;
   flex-direction: column;
   border: none;
-  margin: 4px;
 }
 
 .column-bar-container {
@@ -32,6 +41,11 @@
   flex-direction: row;
   gap: 10px;
   background-color: #e0e0e0;
+}
+
+.column-bar {
+  font-size: 15px;
+  margin-right: 2px;
 }
 
 .row-bar-container {

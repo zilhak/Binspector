@@ -17,8 +17,6 @@ function Binspector() {
   const [direction, setDirection] = React.useState<"column" | "row">("row");
   const [file, setFile] = React.useState<File | null>(null);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [index, setIndex] = React.useState<number>(0);
-
   const updateLayout = () => {
     const { innerWidth: width, innerHeight: height } = window;
     if (width > height) {

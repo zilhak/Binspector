@@ -46,9 +46,11 @@ export function TopMenu({ setFile }: TopMenuProps) {
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const selectedFile = event.target.files?.[0];
+    console.log("test");
     if (selectedFile) {
       setFile(selectedFile);
     }
+    event.target.value = "";
   };
 
   return (
