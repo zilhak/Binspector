@@ -45,7 +45,7 @@ const RowBar = (props: { index: number; count: number; stride: number }) => {
   let offset = props.index;
   for (let i = 0; i < props.count; i++) {
     rows.push(
-      <div key={i} className="row-bar">
+      <div key={i} className="row-bar-item">
         {offset.toString(16).toUpperCase().padStart(4, "0")}
       </div>,
     );
@@ -60,7 +60,7 @@ const ColumnBar = (props: { count: number; stride: number }) => {
 
   for (let i = 0; i < props.count; i += props.stride) {
     columns.push(
-      <div key={i} className="column-bar">
+      <div key={i} className="column-bar-item">
         {i.toString(16).toUpperCase().padStart(2, "0")}
       </div>,
     );
@@ -81,14 +81,11 @@ const HexEditor = ({ data }: HexEditorProps) => {
         );
 
   return (
-    <Grid 
+    <Grid
       container 
       spacing={2} 
       className="hex-editor"
-      sx={{
-        marginTop: '-6px',
-        marginLeft: '-6px',
-      }}>
+      sx={{ margin: '0px', }}>
       {hexValues.map((hex, index) => (
         <HexCell key={index} value={hex} />
       ))}

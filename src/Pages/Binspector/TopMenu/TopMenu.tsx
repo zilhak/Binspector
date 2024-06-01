@@ -9,7 +9,6 @@ import MenuItem from "@mui/material/MenuItem";
 import { OverridableComponent } from "@mui/material/OverridableComponent";
 import Toolbar from "@mui/material/Toolbar";
 import "./TopMenu.css";
-import "@/theme.css";
 
 import {
   ChangeEvent,

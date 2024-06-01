@@ -1,0 +1,21 @@
+:root {
+  --layout-top-menu-height: 50px;
+
+  --layout-editor-column-bar-height: 20px;
+  --layout-editor-row-bar-width: 50px;
+
+  --layout-editor-hex-portion: 1;
+  --layout-editor-string-portion: 1;
+
+  --layout-editor-row-item-width: 50px;
+  --layout-editor-row-item-height: 20px;
+  --layout-editor-row-item-margin-top: 1px;
+  --layout-editor-row-item-margin-bottom: 1px;
+
+  --layout-editor-column-item-width: 20px;
+  --layout-editor-column-item-margin-left: 2px;
+  --layout-editor-column-item-margin-right: 2px;
+
+  --layout-portion-editor:7;
+  --layout-portion-info:3;
+}

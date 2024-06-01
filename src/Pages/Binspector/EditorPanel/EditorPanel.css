@@ -1,9 +1,5 @@
-.editor {
-  height: 100vh;
-}
-
 .hex-panel {
-  height: 100vh;
+  height: 100%;
   flex: 1;
   display: flex;
   box-sizing: border-box;
@@ -17,18 +13,18 @@
 }
 
 .hex-editor {
+  height: 100%;
   display: flex;
   margin-top: 0;
 }
 
 .hex-cell {
   color: var(--color-charactor);
-  margin: 6px;
+  margin-left: 6px;
   font-size: 15px
 }
 
 .string-panel {
-  height: 100vh;
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -43,21 +39,33 @@
   background-color: #e0e0e0;
 }
 
-.column-bar {
+.column-bar-item {
+  width: var(--layout-editor-column-item-width);
+  margin-left: var(--layout-editor-column-item-margin-left);
+  margin-right: var(--layout-editor-column-item-margin-right);
+
   font-size: 15px;
-  margin-right: 2px;
+  font-weight: bold;
 }
 
 .row-bar-container {
-  width: 50px;
+  width: var(--layout-editor-row-item-width);
+
   display: flex;
   flex-direction: column;
   background-color: #c0c0c0;
 }
 
 .row-bar-textarea {
-  margin-top: 20px;
+  margin-top: var(--layout-editor-column-bar-height);
 }
 
-.row-bar {
+.row-bar-item {
+  width: var(--layout-editor-row-item-width);
+  height: var(--layout-editor-row-item-height);
+  margin-top: var(--layout-editor-row-item-margin-top);
+  margin-bottom: var(--layout-editor-row-item-margin-bottom);
+
+  text-align: right;
+  font-weight: bold;
 }

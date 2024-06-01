@@ -2,21 +2,6 @@
   text-align: center;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
 .screen {
   display: flex;
   flex-direction: column;
@@ -24,7 +9,7 @@
 }
 
 .top-menu {
-  height: 50px;
+  height: var(--layout-top-menu-height);
   background-color: #333;
   color: white;
   display: flex;
@@ -35,7 +20,6 @@
 .content {
   flex: 1;
   display: flex;
-  overflow: hidden;
   box-sizing: border-box;
   font-family: 'Courier New', Courier, monospace;
 }
@@ -49,6 +33,8 @@
 }
 
 .panel {
+  height: 100%;
+  width: 100%;
   flex: 1;
   display: flex;
   align-items: center;
@@ -59,9 +45,9 @@
 }
 
 .portion-editor {
-  flex: 7;
+  flex: var(--layout-portion-editor);
 }
 
 .portion-info {
-  flex: 3;
+  flex: var(--layout-portion-info);
 }
