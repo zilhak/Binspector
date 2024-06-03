@@ -58,9 +58,7 @@ const RowBar = (props: { index: number; count: number; stride: number }) => {
 const ColumnBar = (props: { count: number; stride: number }) => {
   const columns = [];
 
-  columns.push(
-    <div className="column-bar-first-margin"> </div>,
-  );
+  columns.push(<div key={100} className="column-bar-first-margin"> </div>);
   for (let i = 0; i < props.count; i += props.stride) {
     columns.push(
       <div key={i} className="column-bar-item">
@@ -79,24 +77,26 @@ interface HexEditorProps {
 }
 
 const HexEditor = ({ data, rowSize, columnSize }: HexEditorProps) => {
-  const hexValues: string[] =
-    data == null
-      ? []
-      : Array.from(data).map((byte) =>
-          byte.toString(16).padStart(2, "0").toUpperCase(),
-        );
+  const hexValues: string[][] = [];
+
+  if (data) {
+    for (let i = 0; i < data.length && i < rowSize * columnSize; i += rowSize) {
+      const row: string[] = Array.from(data.slice(i, i + columnSize)).map((byte) =>
+        byte.toString(16).padStart(2, "0").toUpperCase()
+      );
+      hexValues.push(row);
+    }
+  }
 
   return (
     <div className="hex-editor-container">
-      <Grid
-        container 
-        spacing={2} 
-        className="hex-editor"
-        sx={{ margin: '0px', }}>
-        {hexValues.map((hex, index) => (
-          <HexCell key={index} value={hex} />
-        ))}
-      </Grid>
+      {hexValues.map((hexRow, index) => (
+        <div className="hex-editor-row" key={index}>
+          {hexRow.map((value, index) => (
+            <HexCell key={index} value={value} />
+          ))}
+        </div>
+      ))}
     </div>
   );
 };

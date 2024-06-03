@@ -27,7 +27,7 @@ export function EditorPanel({ file }: EditorPanelProps) {
   return (
     <div className="panel portion-editor editor">
       <HexPanel fileData={fileData} offset={offset} />
-      <StringPanel />
+      <StringPanel fileData={fileData} offset={offset} />
     </div>
   );
 }
