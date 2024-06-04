@@ -1,12 +1,24 @@
+import { useEffect, useState } from "react";
+
 interface HexPanelProps {
   fileData: ArrayBuffer | null;
   offset: number;
 }
 
 export function StringPanel({ fileData, offset }: HexPanelProps) {
+  const [hexData, setHexData] = useState<Uint8Array | null>(null);
+
+  useEffect(() => {
+    if (fileData) {
+      setHexData(new Uint8Array(fileData, offset));
+    } else {
+      setHexData(null);
+    }
+  }, [fileData, offset]);
+
   return (
     <div className="panel string-panel-container">
-      <StringArea data={null} rowSize={16} columnSize={16} />
+      <StringArea data={hexData} rowSize={16} columnSize={16} />
     </div>
   );
 }
@@ -18,26 +30,26 @@ interface HexEditorProps {
 }
 
 const StringArea = ({ data, rowSize, columnSize }: HexEditorProps) => {
-  const hexValues: string[][] = [];
+  const strValues: string[][] = [];
 
   if (data) {
     for (let i = 0; i < data.length && i < rowSize * columnSize; i += rowSize) {
-      const row: string[] = Array.from(data.slice(i, i + columnSize)).map((byte) =>
-        byte.toString(16).padStart(2, "0").toUpperCase()
-      );
-      hexValues.push(row);
+      const row: string[] = Array.from(data.slice(i, i + columnSize)).map((byte) => ByteToChar(byte) );
+      strValues.push(row);
     }
   }
 
   return (
-    <div className="hex-editor-container">
-      {hexValues.map((hexRow, index) => (
+    <div className="string-panel">
+      {strValues.map((hexRow, index) => (
         <div className="hex-editor-row" key={index}>
-          {hexRow.map((value, index) => (
-            <HexCell key={index} value={value} />
-          ))}
+          {hexRow}
         </div>
       ))}
     </div>
   );
 };
+
+function ByteToChar(byte: number): string {
+  return byte >= 32 && byte < 127 ? String.fromCharCode(byte) : ".";
+}

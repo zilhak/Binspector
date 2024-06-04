@@ -32,7 +32,11 @@
 .string-panel-container {
   flex: 1;
   display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
   border: none;
+  color: var(--color-charactor);
 }
 
 .string-panel {

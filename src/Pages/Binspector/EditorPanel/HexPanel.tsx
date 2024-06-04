@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { Grid, Paper } from "@mui/material";
 
 interface HexPanelProps {
   fileData: ArrayBuffer | null;
@@ -18,6 +17,7 @@ export function HexPanel({ fileData, offset }: HexPanelProps) {
       setHexData(null);
     }
   }, [fileData, offset]);
+
   const rowSize = 16; // TODO: get from screen size
   const columnSize = 16; // TODO: get from settings
   const stride = 1;
