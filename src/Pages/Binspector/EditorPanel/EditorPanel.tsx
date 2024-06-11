@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import "./EditorPanel.css";
 import { HexPanel } from "./HexPanel";
-import { StringPanel } from "./StringPanel";
 
 interface EditorPanelProps {
   file: File | null;
@@ -27,7 +26,6 @@ export function EditorPanel({ file }: EditorPanelProps) {
   return (
     <div className="panel portion-editor editor">
       <HexPanel fileData={fileData} offset={offset} />
-      <StringPanel fileData={fileData} offset={offset} />
     </div>
   );
 }

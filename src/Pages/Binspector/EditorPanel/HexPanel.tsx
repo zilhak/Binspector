@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { StringPanel } from "./StringPanel";
 
 interface HexPanelProps {
   fileData: ArrayBuffer | null;
@@ -18,8 +19,8 @@ export function HexPanel({ fileData, offset }: HexPanelProps) {
     }
   }, [fileData, offset]);
 
-  const rowSize = 16; // TODO: get from screen size
-  const columnSize = 16; // TODO: get from settings
+  const rowSize = 32; // TODO: get from screen size
+  const columnSize = 32; // TODO: get from settings
   const stride = 1;
 
   return (
@@ -35,6 +36,9 @@ export function HexPanel({ fileData, offset }: HexPanelProps) {
         <ColumnBar count={rowSize} stride={stride} />
         <HexEditor data={hexData} rowSize={rowSize} columnSize={columnSize} />
       </div>
+      <div className="hex-panel-string">
+        <StringPanel fileData={fileData} offset={offset} rowSize={rowSize} columnSize={columnSize} />
+      </div>
     </div>
   );
 }
@@ -45,9 +49,11 @@ const RowBar = (props: { index: number; count: number; stride: number }) => {
   let offset = props.index;
   for (let i = 0; i < props.count; i++) {
     rows.push(
-      <div key={i} className="row-bar-item">
-        {offset.toString(16).toUpperCase().padStart(4, "0")}
-      </div>,
+      <div className="hex-editor-row" key={i}>
+        <div key={i} className="row-bar-item">
+          {offset.toString(16).toUpperCase().padStart(4, "0")}
+        </div>
+      </div>
     );
     offset += props.stride;
   }
@@ -106,5 +112,13 @@ interface HexCellProps {
 }
 
 const HexCell = ({ value }: HexCellProps) => {
-  return <div className="hex-cell">{value}</div>;
+  const handleMouseOver = () => {
+    console.log(value);
+  }
+
+  const handleMouseLeave = () => {
+    console.log(value);
+  }
+
+  return <div className="hex-cell" onMouseEnter={handleMouseOver} onMouseLeave={handleMouseLeave}>{value}</div>;
 };

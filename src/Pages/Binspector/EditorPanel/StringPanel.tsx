@@ -3,9 +3,11 @@ import { useEffect, useState } from "react";
 interface HexPanelProps {
   fileData: ArrayBuffer | null;
   offset: number;
+  rowSize: number;
+  columnSize: number;
 }
 
-export function StringPanel({ fileData, offset }: HexPanelProps) {
+export function StringPanel({ fileData, offset, rowSize, columnSize }: HexPanelProps) {
   const [hexData, setHexData] = useState<Uint8Array | null>(null);
 
   useEffect(() => {
@@ -18,7 +20,7 @@ export function StringPanel({ fileData, offset }: HexPanelProps) {
 
   return (
     <div className="panel string-panel-container">
-      <StringArea data={hexData} rowSize={16} columnSize={16} />
+      <StringArea data={hexData} rowSize={rowSize} columnSize={columnSize} />
     </div>
   );
 }
@@ -42,7 +44,7 @@ const StringArea = ({ data, rowSize, columnSize }: HexEditorProps) => {
   return (
     <div className="string-panel">
       {strValues.map((hexRow, index) => (
-        <div className="hex-editor-row" key={index}>
+        <div className="string-panel-row" key={index}>
           {hexRow}
         </div>
       ))}

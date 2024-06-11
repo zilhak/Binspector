@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { createContext, useState, useContext, useEffect, ReactNode } from "react";
 import "./Binspector.css";
 import { EditorPanel } from "./EditorPanel/EditorPanel";
 import { InfoPanel } from "./InfoPanel/InfoPanel";
@@ -13,9 +13,25 @@ type Settings = {
   show_info_panel: boolean;
 };
 
+const CaretContext = createContext<{ caret: number; setCaret: React.Dispatch<React.SetStateAction<number>>; } | null>(null);
+
+function CaretProvider({ children }: { children: React.ReactNode }) {
+  const [caret, setCaret] = useState(0);
+
+  return (
+    <CaretContext.Provider value={{ caret, setCaret }}>
+      {children}
+    </CaretContext.Provider>
+  );
+}
+
+function useCaret() {
+  return useContext(CaretContext);
+}
+
 function Binspector() {
-  const [direction, setDirection] = React.useState<"column" | "row">("row");
-  const [file, setFile] = React.useState<File | null>(null);
+  const [direction, setDirection] = useState<"column" | "row">("row");
+  const [file, setFile] = useState<File | null>(null);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const updateLayout = () => {
     const { innerWidth: width, innerHeight: height } = window;
@@ -37,10 +53,12 @@ function Binspector() {
   return (
     <div className="screen">
       <TopMenu setFile={setFile} />
-      <div className={`content ${direction}`}>
-        <EditorPanel file={file} />
-        <InfoPanel />
-      </div>
+      <CaretProvider>
+        <div className={`content ${direction}`}>
+          <EditorPanel file={file} />
+          <InfoPanel />
+        </div>
+      </CaretProvider>
     </div>
   );
 }
