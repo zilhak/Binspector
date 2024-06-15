@@ -1,33 +1,9 @@
-import React, { createContext, useState, useContext, useEffect, ReactNode } from "react";
+import { useState, useEffect } from "react";
 import "./Binspector.css";
 import { EditorPanel } from "./EditorPanel/EditorPanel";
 import { InfoPanel } from "./InfoPanel/InfoPanel";
 import { TopMenu } from "./TopMenu/TopMenu";
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-type Settings = {
-  byte_per_row: number;
-  number_system: "hex" | "dec" | "oct" | "bin";
-
-  show_string_panel: boolean;
-  show_info_panel: boolean;
-};
-
-const CaretContext = createContext<{ caret: number; setCaret: React.Dispatch<React.SetStateAction<number>>; } | null>(null);
-
-function CaretProvider({ children }: { children: React.ReactNode }) {
-  const [caret, setCaret] = useState(0);
-
-  return (
-    <CaretContext.Provider value={{ caret, setCaret }}>
-      {children}
-    </CaretContext.Provider>
-  );
-}
-
-function useCaret() {
-  return useContext(CaretContext);
-}
+import { CaretProvider } from "@/Pages/Binspector/hooks/CaretProvider";
 
 function Binspector() {
   const [direction, setDirection] = useState<"column" | "row">("row");

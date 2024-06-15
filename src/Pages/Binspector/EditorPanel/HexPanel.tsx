@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { StringPanel } from "./StringPanel";
+import { CaretContext } from "@/Pages/Binspector/hooks/CaretContext"
 
 interface HexPanelProps {
   fileData: ArrayBuffer | null;
@@ -83,23 +84,24 @@ interface HexEditorProps {
 }
 
 const HexEditor = ({ data, rowSize, columnSize }: HexEditorProps) => {
-  const hexValues: string[][] = [];
+  const hexRowArray: [string[], number][] = [];
 
   if (data) {
     for (let i = 0; i < data.length && i < rowSize * columnSize; i += rowSize) {
       const row: string[] = Array.from(data.slice(i, i + columnSize)).map((byte) =>
         byte.toString(16).padStart(2, "0").toUpperCase()
       );
-      hexValues.push(row);
+      console.log(i);
+      hexRowArray.push([row, i]);
     }
   }
 
   return (
     <div className="hex-editor-container">
-      {hexValues.map((hexRow, index) => (
+      {hexRowArray.map((hexRow, index) => (
         <div className="hex-editor-row" key={index}>
-          {hexRow.map((value, index) => (
-            <HexCell key={index} value={value} />
+          {hexRow[0].map((value, index) => (
+            <HexCell key={index} value={value} relativeOffset={hexRow[1] + index} />
           ))}
         </div>
       ))}
@@ -109,16 +111,17 @@ const HexEditor = ({ data, rowSize, columnSize }: HexEditorProps) => {
 
 interface HexCellProps {
   value: string;
+  relativeOffset: number;
 }
 
-const HexCell = ({ value }: HexCellProps) => {
-  const handleMouseOver = () => {
-    console.log(value);
+const HexCell = ({ value, relativeOffset }: HexCellProps) => {
+  const setCaret = useContext(CaretContext)?.setCaret;
+  const offset = relativeOffset;
+
+  const handleClick = () => {
+    console.log(`Clicked on ${offset}`);
+    setCaret?.(offset);
   }
 
-  const handleMouseLeave = () => {
-    console.log(value);
-  }
-
-  return <div className="hex-cell" onMouseEnter={handleMouseOver} onMouseLeave={handleMouseLeave}>{value}</div>;
+  return <div className="hex-cell" onClick={handleClick} >{value}</div>;
 };
