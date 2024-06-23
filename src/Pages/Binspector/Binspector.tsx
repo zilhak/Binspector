@@ -28,10 +28,10 @@ function Binspector() {
 
   return (
     <div className="screen">
-      <TopMenu setFile={setFile} />
+      <TopMenu />
       <CaretProvider>
         <div className={`content ${direction}`}>
-          <EditorPanel file={file} />
+          <EditorPanel />
           <InfoPanel />
         </div>
       </CaretProvider>

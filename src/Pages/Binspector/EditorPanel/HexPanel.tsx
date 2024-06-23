@@ -91,7 +91,6 @@ const HexEditor = ({ data, rowSize, columnSize }: HexEditorProps) => {
       const row: string[] = Array.from(data.slice(i, i + columnSize)).map((byte) =>
         byte.toString(16).padStart(2, "0").toUpperCase()
       );
-      console.log(i);
       hexRowArray.push([row, i]);
     }
   }
@@ -119,7 +118,6 @@ const HexCell = ({ value, relativeOffset }: HexCellProps) => {
   const offset = relativeOffset;
 
   const handleClick = () => {
-    console.log(`Clicked on ${offset}`);
     setCaret?.(offset);
   }
 

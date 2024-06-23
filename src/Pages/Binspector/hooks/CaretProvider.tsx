@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { CaretContext } from './CaretContext';
+import React, { useState } from "react";
+import { CaretContext } from "./CaretContext";
 
 export function CaretProvider({ children }: { children: React.ReactNode }) {
   const [caret, setCaret] = useState<number>(0);

@@ -9,21 +9,18 @@ import MenuItem from "@mui/material/MenuItem";
 import { OverridableComponent } from "@mui/material/OverridableComponent";
 import Toolbar from "@mui/material/Toolbar";
 import "./TopMenu.css";
+import { FileContext } from "@/hooks/FileReferenceContext";
 
 import {
   ChangeEvent,
-  Dispatch,
+  useContext,
   MouseEvent,
-  SetStateAction,
   useRef,
   useState,
 } from "react";
 
-interface TopMenuProps {
-  setFile: Dispatch<SetStateAction<File | null>>;
-}
-
-export function TopMenu({ setFile }: TopMenuProps) {
+export function TopMenu() {
+  const setFile = useContext(FileContext).setFile;
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isLogin, setLogin] = useState(false);
 

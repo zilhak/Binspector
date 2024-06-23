@@ -1,15 +1,13 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import "./EditorPanel.css";
 import { HexPanel } from "./HexPanel";
+import { FileContext } from "@/hooks/FileReferenceContext";
 
-interface EditorPanelProps {
-  file: File | null;
-}
-
-export function EditorPanel({ file }: EditorPanelProps) {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+export function EditorPanel() {
   const [offset, setOffset] = useState<number>(0);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  
+  const file = useContext(FileContext).file;
+
   const [fileData, setFileData] = useState<ArrayBuffer | null>(null);
 
   useEffect(() => {
@@ -21,6 +19,7 @@ export function EditorPanel({ file }: EditorPanelProps) {
       };
       reader.readAsArrayBuffer(file);
     }
+    console.log("test")
   }, [file]);
 
   return (
